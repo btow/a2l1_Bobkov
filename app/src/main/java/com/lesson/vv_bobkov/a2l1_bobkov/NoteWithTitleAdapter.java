@@ -85,6 +85,7 @@ class NoteWithTitleAdapter extends BaseAdapter {
 
     public void remNoteFromNoteWithTitleList(int position) {
         App.remNoteFromNoteWithTitleList(position);
+        notifyDataSetChanged();
     }
 
     public void openNoteFromNoteWithTitleList() {
