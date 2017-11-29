@@ -25,7 +25,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         ButterKnife.bind(this);
-        mNoteWithTitleAdapter = new NoteWithTitleAdapter(this);
+        mNoteWithTitleAdapter = new NoteWithTitleAdapter(getApplicationContext());
         lvNotes.setAdapter(mNoteWithTitleAdapter);
     }
 
@@ -35,9 +35,37 @@ public class MainActivity extends AppCompatActivity {
         getMenuInflater().inflate(R.menu.main_menu, menu);
 
         if (App.noteWithTitleListIsEmpty()) {
-            menu.getItem(2).setVisible(false);
+
+            for (int i = 0; i < menu.size(); i++) {
+
+                MenuItem menuItem = menu.getItem(i);
+
+                if (menuItem.getTitle().equals(getString(R.string.add))) {
+                    menuItem.setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
+                } else if (menuItem.getTitle().equals(getString(R.string.remove))) {
+                    menuItem.setShowAsAction(MenuItem.SHOW_AS_ACTION_NEVER);
+                } else if (menuItem.getTitle().equals(getString(R.string.open))) {
+                    menuItem.setShowAsAction(MenuItem.SHOW_AS_ACTION_NEVER);
+                } else if (menuItem.getTitle().equals(getString(R.string.edit))) {
+                    menuItem.setShowAsAction(MenuItem.SHOW_AS_ACTION_NEVER);
+                }
+            }
         } else {
-            menu.getItem(2).setVisible(true);
+
+            for (int i = 0; i < menu.size(); i++) {
+
+                MenuItem menuItem = menu.getItem(i);
+
+                if (menuItem.getTitle().equals(getString(R.string.add))) {
+                    menuItem.setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
+                } else if (menuItem.getTitle().equals(getString(R.string.remove))) {
+                    menuItem.setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
+                } else if (menuItem.getTitle().equals(getString(R.string.open))) {
+                    menuItem.setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
+                } else if (menuItem.getTitle().equals(getString(R.string.edit))) {
+                    menuItem.setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
+                }
+            }
         }
 
         return true;

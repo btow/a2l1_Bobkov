@@ -13,6 +13,11 @@ class NoteWithTitle {
         mText = "";
     }
 
+    public NoteWithTitle(final String title, final String text) {
+        mTitle = title;
+        mText = text;
+    }
+
 
     public String getTitle() {
         return mTitle;

@@ -12,4 +12,5 @@
     <string name="input_the_notes_text">Input the notes text</string>
     <string name="ok">OK</string>
     <string name="cancel">Cancel</string>
+    <string name="notes_no">Notes no</string>
 </resources>

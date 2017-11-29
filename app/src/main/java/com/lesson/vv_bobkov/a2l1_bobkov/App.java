@@ -20,6 +20,15 @@ public class App extends Application {
 
     private static ArrayList<NoteWithTitle> mNoteWithTitleList = null;
     private static HashMap<Integer, NoteWithTitle> mSelectedItems;
+    private static App mApp;
+
+    public App(){
+        mApp = this;
+    }
+
+    public static App getApp() {
+        return mApp;
+    }
 
     public static void setNoteWithTitleList(ArrayList<NoteWithTitle> noteWithTitleList) {
         App.mNoteWithTitleList = noteWithTitleList;
@@ -30,7 +39,13 @@ public class App extends Application {
     }
 
     public static boolean noteWithTitleListIsEmpty() {
-        return mNoteWithTitleList == null;
+
+        if (mNoteWithTitleList == null ||
+                (mNoteWithTitleList.size() == 1 &&
+                        mNoteWithTitleList.get(0).getTitle().equals(
+                                mApp.getResources().getString(R.string.notes_no)
+                        ))) return true;
+        return false;
     }
 
     public static void addNewNoteToNoteWithTitleList(NoteWithTitle noteWithTitle) {

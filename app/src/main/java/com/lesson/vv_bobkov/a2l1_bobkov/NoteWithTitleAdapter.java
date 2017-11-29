@@ -28,11 +28,14 @@ class NoteWithTitleAdapter extends BaseAdapter {
 
     NoteWithTitleAdapter(Context cxt) {
 
-        if (App.noteWithTitleListIsEmpty()) {
-            App.setNoteWithTitleList(new ArrayList<NoteWithTitle>());
-        }
         mCxt = cxt;
         layoutInflater = (LayoutInflater)cxt.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+
+        if (App.noteWithTitleListIsEmpty()) {
+            App.setNoteWithTitleList(new ArrayList<NoteWithTitle>());
+            App.addNewNoteToNoteWithTitleList(
+                    new NoteWithTitle(cxt.getString(R.string.notes_no), ""));
+        }
     }
 
     @Override
@@ -57,7 +60,8 @@ class NoteWithTitleAdapter extends BaseAdapter {
             view = layoutInflater.inflate(R.layout.list_view_item, viewGroup, false);
         }
 
-        ButterKnife.bind(view);
+        ButterKnife.bind(this, view);
+
         tvNotesTitle.setText(App.getNoteWithTitleList().get(i).getTitle());
         tvNotesTitle.setOnClickListener(new View.OnClickListener() {
 
