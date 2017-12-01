@@ -2,6 +2,8 @@ package com.lesson.vv_bobkov.a2l1_bobkov;
 
 import android.app.Application;
 import android.content.Intent;
+import android.view.Menu;
+import android.view.MenuItem;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -14,15 +16,16 @@ import java.util.List;
 public class App extends Application {
 
     static final boolean
-            NOTES_MODE_OPEN = false,
-            NOTES_MODE_EDIT = true;
+            NOTES_MODE_OPEN = true,
+            NOTES_MODE_EDIT = false;
     static boolean NOTES_MODE = false;
 
     private static ArrayList<NoteWithTitle> mNoteWithTitleList = null;
     private static HashMap<Integer, NoteWithTitle> mSelectedItems;
+    private static Menu mMenu;
     private static App mApp;
 
-    public App(){
+    public App() {
         mApp = this;
     }
 
@@ -61,7 +64,12 @@ public class App extends Application {
     }
 
     public static boolean selectedItemsIsEmpty() {
-        return mSelectedItems == null;
+
+        if (mSelectedItems == null ||
+                mSelectedItems.isEmpty()) {
+            return true;
+        }
+        return false;
     }
 
     public static HashMap<Integer, NoteWithTitle> getSelectedItems() {
@@ -78,5 +86,50 @@ public class App extends Application {
 
     public static void addSelectedItem(Integer positoin, NoteWithTitle noteWithTitle) {
         App.mSelectedItems.put(positoin, noteWithTitle);
+    }
+
+    public static void prepareMenu(Menu menu) {
+
+        if (App.noteWithTitleListIsEmpty() || App.selectedItemsIsEmpty()) {
+
+            for (int i = 0; i < menu.size(); i++) {
+
+                MenuItem menuItem = menu.getItem(i);
+
+                menuItem.setShowAsAction(MenuItem.SHOW_AS_ACTION_NEVER);
+                menuItem.setVisible(false);
+            }
+        } else if (App.getSelectedItems().size() > 1) {
+
+            for (int i = 0; i < menu.size(); i++) {
+
+                MenuItem menuItem = menu.getItem(i);
+
+                menuItem.setVisible(true);
+
+                if (menuItem.getTitle().equals(mApp.getResources().getString(R.string.remove))) {
+                    menuItem.setShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM);
+                } else {
+                    menuItem.setShowAsAction(MenuItem.SHOW_AS_ACTION_NEVER);
+                    menuItem.setVisible(false);
+                }
+            }
+        } else {
+
+            for (int i = 0; i < menu.size(); i++) {
+
+                MenuItem menuItem = menu.getItem(i);
+                menuItem.setShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM);
+                menuItem.setVisible(true);
+            }
+        }
+    }
+
+    public static Menu getMenu() {
+        return mMenu;
+    }
+
+    public static void setMenu(Menu menu) {
+        App.mMenu = menu;
     }
 }

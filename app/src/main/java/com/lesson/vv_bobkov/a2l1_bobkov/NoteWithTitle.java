@@ -6,16 +6,18 @@ package com.lesson.vv_bobkov.a2l1_bobkov;
 
 class NoteWithTitle {
 
-    private String mTitle, mText;
+    private String mTitle, mAddress, mText;
 
-    NoteWithTitle() {
-        mTitle = "";
-        mText = "";
+    public NoteWithTitle(final String title, final String address, final String text) {
+        mTitle = title;
+        mAddress = address;
+        mText = text;
     }
 
-    public NoteWithTitle(final String title, final String text) {
-        mTitle = title;
-        mText = text;
+    public NoteWithTitle(int notesNo) {
+        mTitle = App.getApp().getString(notesNo);
+        mAddress = "";
+        mText = "";
     }
 
 
@@ -23,7 +25,7 @@ class NoteWithTitle {
         return mTitle;
     }
 
-    public void setTitle(String mTitle) {
+    public void setTitle(final String mTitle) {
         this.mTitle = mTitle;
     }
 
@@ -31,12 +33,21 @@ class NoteWithTitle {
         return mText;
     }
 
-    public void setText(String mText) {
+    public void setText(final String mText) {
         this.mText = mText;
     }
 
-    public void editNote(NoteWithTitle noteWithTitle) {
+    public String getAddress() {
+        return mAddress;
+    }
+
+    public void setAddress(final String address) {
+        this.mAddress = address;
+    }
+
+    public void editNote(final NoteWithTitle noteWithTitle) {
         mTitle = noteWithTitle.getTitle();
+        mAddress = noteWithTitle.getAddress();
         mText = noteWithTitle.getText();
     }
 }

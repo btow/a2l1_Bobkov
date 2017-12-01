@@ -9,8 +9,10 @@
     <string name="edit">Edit</string>
     <string name="edit_the_note_from_the_list">Edit the note from the list</string>
     <string name="input_the_notes_title">Input the notes title</string>
+    <string name="input_the_notes_address">Input the notes address</string>
     <string name="input_the_notes_text">Input the notes text</string>
     <string name="ok">OK</string>
     <string name="cancel">Cancel</string>
     <string name="notes_no">Notes no</string>
+    <string name="attantion">Attantion!!!</string>
 </resources>

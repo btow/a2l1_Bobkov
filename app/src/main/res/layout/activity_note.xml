@@ -20,6 +20,18 @@
         />
 
     <EditText
+        android:id="@+id/etNotesAddress"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/input_the_notes_address"
+        android:visibility="visible"
+        android:layout_margin="@dimen/activity_horizontal_margin"
+        android:maxLines="3"
+        android:scrollbars="vertical"
+        android:scrollbarStyle="insideInset"
+        />
+
+    <EditText
         android:id="@+id/etNotesText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -40,6 +52,18 @@
         android:maxLines="3"
         android:scrollbars="vertical"
         android:scrollbarStyle="insideInset"
+        />
+
+    <TextView
+        android:id="@+id/tvAddressOfNote"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        android:layout_margin="@dimen/activity_horizontal_margin"
+        android:maxLines="3"
+        android:scrollbars="vertical"
+        android:scrollbarStyle="insideInset"
+        android:onClick="onClickMap"
         />
 
     <TextView
